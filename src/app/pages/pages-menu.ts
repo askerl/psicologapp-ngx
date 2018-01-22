@@ -21,5 +21,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Facturaciones',
     icon: 'ion-social-usd-outline',
     link: '/pages/facturaciones',
-  }
+  },
 ];
