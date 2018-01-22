@@ -10,16 +10,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Pacientes',
     icon: 'ion-ios-people-outline',
-    link: '/pages/pacientes'
+    link: '/pages/pacientes',
   },
   {
     title: 'Sesiones',
     icon: 'ion-ios-chatboxes-outline',
-    link: '/pages/sesiones'
+    link: '/pages/sesiones',
   },
   {
     title: 'Facturaciones',
     icon: 'ion-social-usd-outline',
-    link: '/pages/facturaciones'
+    link: '/pages/facturaciones',
   }
 ];
