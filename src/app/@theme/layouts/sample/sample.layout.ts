@@ -27,12 +27,8 @@ import 'rxjs/add/operator/delay';
       <nb-sidebar class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive
-                   [right]="sidebar.id === 'right'">
-        <nb-sidebar-header>
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>Support Us</span>
-          </a>
-        </nb-sidebar-header>
+                   [right]="sidebar.id === 'right'"
+                   state="compacted">
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
