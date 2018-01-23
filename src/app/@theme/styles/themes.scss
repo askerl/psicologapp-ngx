@@ -14,6 +14,9 @@ $nb-themes: nb-register-theme((
 
   font-main: Roboto,
   font-secondary: Exo,
+
+  color-fg-highlight: #20a8d8,
+  color-success: #20a8d8,
 ), default, default);
 
 $nb-themes: nb-register-theme((

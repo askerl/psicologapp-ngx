@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data/data.service';
 import { Observable } from 'rxjs/Observable';
 import { TipoPacienteViewComponent } from '../../customRender/tipo-paciente-view/tipo-paciente-view.component';
+import { LocalDataSource } from 'ng2-smart-table/lib/data-source/local/local.data-source';
 
 @Component({
   selector: 'app-pacientes',
@@ -35,11 +36,25 @@ export class PacientesComponent implements OnInit {
         title: 'Tipo',
         type: 'custom',
         renderComponent: TipoPacienteViewComponent,
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Todos',
+            list: this.data.getFiltroTipoPaciente(),
+          },
+        },
       },
       prepaga: {
         title: 'Prepaga',
         type: 'string',
         valuePrepareFunction: (value) => { return value ? this.data.prepagasById[value].nombre : '' },
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Todas',
+            list: this.data.getFiltroPrepaga(),
+          },
+        },
       },
       credencial: {
         title: 'Credencial',
@@ -54,16 +69,23 @@ export class PacientesComponent implements OnInit {
 
   pacientes = [];
 
+  source: LocalDataSource;
+
   constructor(private data: DataService) {
-    
+    this.source = new LocalDataSource(this.pacientes); 
   }
 
   ngOnInit() {
 
     this.data.getPacientes();
     this.data.pacientes.subscribe(
-      (pac: any[]) => this.pacientes = pac
+      (pac: any[]) => {
+        this.pacientes = pac;
+        this.source.load(this.pacientes);
+      }
     );
+
+    
 
   }
 

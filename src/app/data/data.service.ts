@@ -14,21 +14,21 @@ export class DataService {
   
   tipoPaciente = {
     "O": { nombre: "Obra social", color: "primary" },
-    "P": { nombre: "Privado", color: "warning" }
+    "P": { nombre: "Privado", color: "warning" },
   };
 
   prepagasById = {
     "galeno": {
         nombre: "Galeno",
-        pagos: [15, 175, 452.36]
+        pagos: [15, 175, 452.36],
     },
     "ososs": {
         nombre: "OSOSS",
-        pagos: [230]
+        pagos: [230],
     },
     "ospacp": {
         nombre: "O.S.P.A.C.P",
-        pagos: [230]
+        pagos: [230],
     }
 }
 
@@ -54,6 +54,22 @@ export class DataService {
     let porcUsadas = sesionesAut > 0 ? sesiones / sesionesAut * 100 : 0;
     let porcRestantes = sesionesAut > 0 ? (sesionesAut - sesiones)/ sesionesAut * 100 : 0 ;
     return {porcUsadas, porcRestantes};
+  }
+
+  getFiltroTipoPaciente() {
+    let list = [];
+    for (const key in this.tipoPaciente) {
+      list.push({ value: key, title: this.tipoPaciente[key].nombre })
+    }
+    return list;
+  }
+
+  getFiltroPrepaga() {
+    let list = [];
+    for (const key in this.prepagasById) {
+      list.push({ value: key, title: this.prepagasById[key].nombre })
+    }
+    return list;
   }
 
 }
