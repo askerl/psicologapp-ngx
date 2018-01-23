@@ -21,8 +21,12 @@ import { AngularFirestoreModule} from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment} from '../environments/environment';
 
+// data Service
+import { DataService } from './data/data.service';
+import { TipoPacienteViewComponent } from './customRender/tipo-paciente-view/tipo-paciente-view.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TipoPacienteViewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -40,6 +44,10 @@ import { environment} from '../environments/environment';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    DataService,
+  ],
+  entryComponents: [
+    TipoPacienteViewComponent,
   ],
 })
 export class AppModule {

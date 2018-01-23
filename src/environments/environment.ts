@@ -18,4 +18,12 @@ export const environment = {
     storageBucket: 'psicologapp-84.appspot.com',
     messagingSenderId: '721791562259',
   },
+  firebaseTesting: {
+    apiKey: "AIzaSyDVbWeM5isevTOPK5TEyGjCZlZqulVUjJQ",
+    authDomain: "psicologapp-testing.firebaseapp.com",
+    databaseURL: "https://psicologapp-testing.firebaseio.com",
+    projectId: "psicologapp-testing",
+    storageBucket: "psicologapp-testing.appspot.com",
+    messagingSenderId: "236252094290"
+  },
 };
