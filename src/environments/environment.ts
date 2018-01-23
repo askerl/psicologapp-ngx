@@ -11,11 +11,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBP2hcETIRSFvvFhgMabmDZ-RjShqDlX70",
-    authDomain: "psicologapp-84.firebaseapp.com",
-    databaseURL: "https://psicologapp-84.firebaseio.com",
-    projectId: "psicologapp-84",
-    storageBucket: "psicologapp-84.appspot.com",
-    messagingSenderId: "721791562259",
+    apiKey: 'AIzaSyBP2hcETIRSFvvFhgMabmDZ-RjShqDlX70',
+    authDomain: 'psicologapp-84.firebaseapp.com',
+    databaseURL: 'https://psicologapp-84.firebaseio.com',
+    projectId: 'psicologapp-84',
+    storageBucket: 'psicologapp-84.appspot.com',
+    messagingSenderId: '721791562259',
   },
 };
