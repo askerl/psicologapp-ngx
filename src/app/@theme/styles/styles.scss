@@ -20,11 +20,11 @@
 };
 
 .ng2-smart-filters {
-  select.form-control:not([size]):not([multiple]){
+  select.form-control:not([size]):not([multiple]) {
     height: 36px !important;
   }
 }
 
-.badge-primary{
+.badge-primary {
   background-color: #20a8d8;
 }
