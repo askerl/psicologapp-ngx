@@ -17,9 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // connection to Firebase
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule} from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from './../environments/environment';
+import { environment} from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +34,7 @@ import { environment } from './../environments/environment';
     CoreModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
   ],
   bootstrap: [AppComponent],
