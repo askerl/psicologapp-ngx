@@ -8,7 +8,7 @@ describe('TipoPacienteViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TipoPacienteViewComponent ]
+      declarations: [ TipoPacienteViewComponent ],
     })
     .compileComponents();
   }));

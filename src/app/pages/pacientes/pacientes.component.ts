@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data/data.service';
-import { Observable } from 'rxjs/Observable';
 import { TipoPacienteViewComponent } from '../../customRender/tipo-paciente-view/tipo-paciente-view.component';
 import { LocalDataSource } from 'ng2-smart-table/lib/data-source/local/local.data-source';
 
 @Component({
-  selector: 'app-pacientes',
+  selector: 'ngx-pacientes',
   templateUrl: './pacientes.component.html',
-  styleUrls: ['./pacientes.component.scss']
+  styleUrls: ['./pacientes.component.scss'],
 })
 export class PacientesComponent implements OnInit {
 
@@ -47,7 +46,7 @@ export class PacientesComponent implements OnInit {
       prepaga: {
         title: 'Prepaga',
         type: 'string',
-        valuePrepareFunction: (value) => { return value ? this.data.prepagasById[value].nombre : '' },
+        valuePrepareFunction: (value) => value ? this.data.prepagasById[value].nombre : '',
         filter: {
           type: 'list',
           config: {
@@ -72,7 +71,7 @@ export class PacientesComponent implements OnInit {
   source: LocalDataSource;
 
   constructor(private data: DataService) {
-    this.source = new LocalDataSource(this.pacientes); 
+    this.source = new LocalDataSource(this.pacientes);
   }
 
   ngOnInit() {
@@ -82,10 +81,7 @@ export class PacientesComponent implements OnInit {
       (pac: any[]) => {
         this.pacientes = pac;
         this.source.load(this.pacientes);
-      }
-    );
-
-    
+    });
 
   }
 
