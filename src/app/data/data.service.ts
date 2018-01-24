@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
-
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { CONSTANTS } from './constants';
 
 @Injectable()
 export class DataService {
@@ -11,28 +10,7 @@ export class DataService {
     ref => ref.orderBy('apellido', 'asc').orderBy('nombre', 'asc'));
   pacientes: Observable<any[]>;
 
-  tipoPaciente = {
-    'O': { nombre: 'Obra social', color: 'primary' },
-    'P': { nombre: 'Privado', color: 'warning' },
-  };
-
-  prepagasById = {
-    'galeno': {
-        nombre: 'Galeno',
-        pagos: [15, 175, 452.36],
-    },
-    'ososs': {
-        nombre: 'OSOSS',
-        pagos: [230],
-    },
-    'ospacp': {
-        nombre: 'O.S.P.A.C.P',
-        pagos: [230],
-    },
-  }
-
   constructor(private readonly afs: AngularFirestore) {
-
   }
 
   getPacientes() {
@@ -56,7 +34,7 @@ export class DataService {
   }
 
   getFiltroTipoPaciente() {
-    const list = [], obj = this.tipoPaciente;
+    const list = [], obj = CONSTANTS.tipoPaciente;
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         list.push({ value: key, title: obj[key].nombre })
@@ -66,13 +44,18 @@ export class DataService {
   }
 
   getFiltroPrepaga() {
-    const list = [], obj = this.prepagasById;
+    const list = [], obj = CONSTANTS.prepagasById;
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         list.push({ value: key, title: obj[key].nombre })
       }
     }
     return list;
+  }
+
+  getNombrePrepaga(idPrepaga: string) {
+    console.log(idPrepaga);
+    return CONSTANTS.prepagasById[idPrepaga];
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table/components/cell/cell-view-mode/view-cell';
-import { DataService } from '../../data/data.service';
-
+import { CONSTANTS } from '../../data/constants';
 
 @Component({
   selector: 'ngx-tipo-paciente-view',
@@ -16,13 +15,11 @@ export class TipoPacienteViewComponent implements ViewCell, OnInit {
   @Input() value: string;
   @Input() rowData: any;
 
-  constructor(private data: DataService) {
-
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.renderValue = this.data.tipoPaciente[this.value].nombre;
-    this.color = this.data.tipoPaciente[this.value].color;
+    this.renderValue = CONSTANTS.tipoPaciente[this.value].nombre;
+    this.color = CONSTANTS.tipoPaciente[this.value].color;
   }
 
 }

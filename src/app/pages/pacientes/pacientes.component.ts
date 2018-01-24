@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data/data.service';
 import { TipoPacienteViewComponent } from '../../customRender/tipo-paciente-view/tipo-paciente-view.component';
 import { LocalDataSource } from 'ng2-smart-table/lib/data-source/local/local.data-source';
+import { SesionesRestantesViewComponent } from '../../customRender/sesiones-restantes-view/sesiones-restantes-view.component';
 
 @Component({
   selector: 'ngx-pacientes',
@@ -46,7 +47,7 @@ export class PacientesComponent implements OnInit {
       prepaga: {
         title: 'Prepaga',
         type: 'string',
-        valuePrepareFunction: (value) => value ? this.data.prepagasById[value].nombre : '',
+        valuePrepareFunction: (value) => value ? this.data.getNombrePrepaga(value) : '',
         filter: {
           type: 'list',
           config: {
@@ -61,7 +62,8 @@ export class PacientesComponent implements OnInit {
       },
       sesionesRestantes: {
         title: 'Sesiones restantes',
-        type: 'number',
+        type: 'custom',
+        renderComponent: SesionesRestantesViewComponent,
       },
     },
   };
