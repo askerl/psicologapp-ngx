@@ -26,7 +26,6 @@ export class SesionesRestantesViewComponent implements ViewCell, OnInit {
 		} else {
       this.type = 'danger';
     }
-    console.log(this.rowData)
   }
 
 }

@@ -32,6 +32,12 @@ export class PacientesComponent implements OnInit {
         title: 'Paciente',
         type: 'string',
       },
+      edad: {
+        title: 'Edad',
+        type: 'number',
+        width: '30px',
+        valuePrepareFunction: (value) => value > 0 ? value : '',
+      },
       tipo: {
         title: 'Tipo',
         type: 'custom',

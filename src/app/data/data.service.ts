@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { CONSTANTS } from './constants';
+import * as moment from 'moment';
 
 @Injectable()
 export class DataService {
@@ -22,6 +23,9 @@ export class DataService {
         paciente.sesionesRestantes = paciente.sesionesAut ? (paciente.sesionesAut - paciente.sesiones) : '';
         const porcs = this.calcPorcentajesSesiones(paciente.sesionesAut, paciente.sesiones);
         paciente.porcRestantes = porcs.porcRestantes;
+        const fchNacMoment = moment(paciente.fchNac, 'DD/MM/YYYY');
+        paciente.edad = fchNacMoment.isValid() ? moment().diff(fchNacMoment, 'years') : 0;
+
         return { id, ...paciente };
       });
     });
@@ -54,8 +58,7 @@ export class DataService {
   }
 
   getNombrePrepaga(idPrepaga: string) {
-    console.log(idPrepaga);
-    return CONSTANTS.prepagasById[idPrepaga];
+    return CONSTANTS.prepagasById[idPrepaga].nombre;
   }
 
 }

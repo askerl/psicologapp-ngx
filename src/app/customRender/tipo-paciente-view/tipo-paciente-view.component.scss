@@ -1,3 +1,12 @@
-.badge{
-    width: 100%;
+@import '../../@theme/styles/themes';
+@include nb-install-component() {
+ 
+    .badge{
+        width: 100%;
+    }
+
+    .badge-primary {
+        background-color: nb-theme(color-primary);
+    }
+  
 }
