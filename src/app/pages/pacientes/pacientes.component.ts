@@ -94,7 +94,7 @@ export class PacientesComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() { 
+  loadData() {
     this.data.getPacientes(this.estado.value);
     this.data.pacientes.subscribe(
       (pac: any[]) => {

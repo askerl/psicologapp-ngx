@@ -4,13 +4,8 @@
     .dropdown {
         min-width: 125px;
         button {
-            padding: 0.1rem .5rem;
+            padding: 0.1rem 0.5rem;
         }
-    }
-
-    .nb-theme-default ng2-smart-table th.ng2-smart-actions-title-add a {
-        background-color: nb-theme(color-primary);
-        font-size: 1.3rem !important;
     }
 
 }

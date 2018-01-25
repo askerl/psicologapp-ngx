@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Injectable()
 export class DataService {
 
-  private pacientesCollection: AngularFirestoreCollection<any>; 
+  private pacientesCollection: AngularFirestoreCollection<any>;
   pacientes: Observable<any[]>;
 
   constructor(private readonly afs: AngularFirestore) {
@@ -22,7 +22,7 @@ export class DataService {
       // todos los pacientes
       this.pacientesCollection = this.afs.collection('pacientes',ref => ref.orderBy('apellido', 'asc').orderBy('nombre', 'asc'));
     }
-    
+
     this.pacientes = this.pacientesCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         return this.setPacienteFromData(a);
