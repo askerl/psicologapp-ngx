@@ -25,7 +25,6 @@ import { environment} from '../environments/environment';
 import { DataService } from './data/data.service';
 import { TipoPacienteViewComponent } from './customRender/tipo-paciente-view/tipo-paciente-view.component';
 import { SesionesRestantesViewComponent } from './customRender/sesiones-restantes-view/sesiones-restantes-view.component';
-import { CONSTANTS } from './data/constants';
 
 @NgModule({
   declarations: [AppComponent, TipoPacienteViewComponent, SesionesRestantesViewComponent],

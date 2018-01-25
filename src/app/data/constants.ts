@@ -4,7 +4,7 @@ export const CONSTANTS = {
         'O': { nombre: 'Obra social', color: 'primary' },
         'P': { nombre: 'Privado', color: 'warning' },
     },
-    
+
     prepagasById: {
         'galeno': {
             nombre: 'Galeno',

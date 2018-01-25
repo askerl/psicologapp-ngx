@@ -4,7 +4,7 @@ import { ViewCell } from 'ng2-smart-table/components/cell/cell-view-mode/view-ce
 @Component({
   selector: 'ngx-sesiones-restantes-view',
   templateUrl: './sesiones-restantes-view.component.html',
-  styleUrls: ['./sesiones-restantes-view.component.scss']
+  styleUrls: ['./sesiones-restantes-view.component.scss'],
 })
 export class SesionesRestantesViewComponent implements ViewCell, OnInit {
 
@@ -19,11 +19,11 @@ export class SesionesRestantesViewComponent implements ViewCell, OnInit {
 
   ngOnInit() {
     this.porc = this.rowData.porcRestantes > 0 ? this.rowData.porcRestantes : '100';
-		if (this.rowData.porcRestantes > 50) {
-			this.type = 'primary';
-		} else if (this.rowData.porcRestantes > 10) {
-			this.type = 'warning';
-		} else {
+    if (this.rowData.porcRestantes > 50) {
+      this.type = 'primary';
+    } else if (this.rowData.porcRestantes > 10) {
+      this.type = 'warning';
+    } else {
       this.type = 'danger';
     }
   }
