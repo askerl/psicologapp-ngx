@@ -3,6 +3,8 @@ import { DataService } from '../../data/data.service';
 import { TipoPacienteViewComponent } from '../../customRender/tipo-paciente-view/tipo-paciente-view.component';
 import { LocalDataSource } from 'ng2-smart-table/lib/data-source/local/local.data-source';
 import { SesionesRestantesViewComponent } from '../../customRender/sesiones-restantes-view/sesiones-restantes-view.component';
+import { CONSTANTS } from '../../data/constants';
+import { NombrePacienteViewComponent } from '../../customRender/nombre-paciente-view/nombre-paciente-view.component';
 
 @Component({
   selector: 'ngx-pacientes',
@@ -15,7 +17,7 @@ export class PacientesComponent implements OnInit {
     mode: 'external',
     actions: {
       delete: false,
-      columnTitle: 'Acciones',
+      columnTitle: ''
     },
     noDataMessage: 'No hay datos ingresados',
     add: {
@@ -30,7 +32,8 @@ export class PacientesComponent implements OnInit {
     columns: {
       nombreCompleto: {
         title: 'Paciente',
-        type: 'string',
+        type: 'custom',
+        renderComponent: NombrePacienteViewComponent,
       },
       edad: {
         title: 'Edad',
@@ -41,6 +44,7 @@ export class PacientesComponent implements OnInit {
       tipo: {
         title: 'Tipo',
         type: 'custom',
+        width: '130px',
         renderComponent: TipoPacienteViewComponent,
         filter: {
           type: 'list',
@@ -53,6 +57,7 @@ export class PacientesComponent implements OnInit {
       prepaga: {
         title: 'Prepaga',
         type: 'string',
+        width: '130px',
         valuePrepareFunction: (value) => value ? this.data.getNombrePrepaga(value) : '',
         filter: {
           type: 'list',
@@ -70,27 +75,39 @@ export class PacientesComponent implements OnInit {
         title: 'Sesiones restantes',
         type: 'custom',
         renderComponent: SesionesRestantesViewComponent,
-      },
+      }
     },
   };
 
   pacientes = [];
+  estados = CONSTANTS.estados;
+  estado: any;
 
   source: LocalDataSource;
 
   constructor(private data: DataService) {
-    this.source = new LocalDataSource(this.pacientes);
+    this.source = new LocalDataSource();
   }
 
   ngOnInit() {
+    this.estado = this.estados[0];
+    this.loadData();
+  }
 
-    this.data.getPacientes();
+  loadData() { 
+    this.data.getPacientes(this.estado.value);
     this.data.pacientes.subscribe(
       (pac: any[]) => {
         this.pacientes = pac;
         this.source.load(this.pacientes);
     });
+  }
 
+  onClickEstado(e) {
+    if (this.estado.value !== e.value) {
+      this.estado = e;
+      this.loadData();
+    }
   }
 
 }

@@ -1,6 +1,17 @@
 <nb-card>
   <nb-card-header>
-    Pacientes
+    <div id="pacientes-header" class="d-flex justify-content-between">
+      <div>Pacientes</div>
+      <div class="dropdown" ngbDropdown>
+        <button type="button" ngbDropdownToggle class="btn"
+                [ngClass]="'btn-outline-primary'">
+          {{ estado.title }}
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li class="dropdown-item" *ngFor="let e of estados" (click)="onClickEstado(e)">{{ e.title }}</li>
+        </ul>
+      </div>
+      </div>
   </nb-card-header>
 
   <nb-card-body>

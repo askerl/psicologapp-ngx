@@ -25,9 +25,10 @@ import { environment} from '../environments/environment';
 import { DataService } from './data/data.service';
 import { TipoPacienteViewComponent } from './customRender/tipo-paciente-view/tipo-paciente-view.component';
 import { SesionesRestantesViewComponent } from './customRender/sesiones-restantes-view/sesiones-restantes-view.component';
+import { NombrePacienteViewComponent } from './customRender/nombre-paciente-view/nombre-paciente-view.component';
 
 @NgModule({
-  declarations: [AppComponent, TipoPacienteViewComponent, SesionesRestantesViewComponent],
+  declarations: [AppComponent, TipoPacienteViewComponent, SesionesRestantesViewComponent, NombrePacienteViewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,6 +51,7 @@ import { SesionesRestantesViewComponent } from './customRender/sesiones-restante
   entryComponents: [
     TipoPacienteViewComponent,
     SesionesRestantesViewComponent,
+    NombrePacienteViewComponent
   ],
 })
 export class AppModule {

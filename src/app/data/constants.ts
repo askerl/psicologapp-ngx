@@ -20,5 +20,11 @@ export const CONSTANTS = {
         },
     },
 
+    estados: [
+        { value: null, title: 'Todos' },
+        { value: true, title: 'Activos' },
+        { value: false, title: 'Inactivos'}
+    ]
+
 };
 

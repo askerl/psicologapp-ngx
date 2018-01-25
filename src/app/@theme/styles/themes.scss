@@ -17,6 +17,8 @@ $nb-themes: nb-register-theme((
 
   color-fg-highlight: #20a8d8,
   color-primary: #20a8d8,
+  smart-table-paging-bg-active: color-primary,
+  
 ), default, default);
 
 $nb-themes: nb-register-theme((
