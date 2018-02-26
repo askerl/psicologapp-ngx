@@ -5,6 +5,7 @@ import { LocalDataSource } from 'ng2-smart-table/lib/data-source/local/local.dat
 import { SesionesRestantesViewComponent } from '../../customRender/sesiones-restantes-view/sesiones-restantes-view.component';
 import { CONSTANTS } from '../../data/constants';
 import { NombrePacienteViewComponent } from '../../customRender/nombre-paciente-view/nombre-paciente-view.component';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-pacientes',
@@ -85,7 +86,7 @@ export class PacientesComponent implements OnInit {
 
   source: LocalDataSource;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private router: Router) {
     this.source = new LocalDataSource();
   }
 
@@ -108,6 +109,14 @@ export class PacientesComponent implements OnInit {
       this.estado = e;
       this.loadData();
     }
+  }
+
+  onCreate(e) {
+    this.router.navigate(['/pages/pacientes/paciente', 'new']);
+  }
+
+  onEdit(e) {
+    this.router.navigate(['/pages/pacientes/paciente', e.data.id]);
   }
 
 }
