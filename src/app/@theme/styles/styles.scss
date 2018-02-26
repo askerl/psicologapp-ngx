@@ -17,10 +17,32 @@
 
   // loading progress bar
   @include ngx-pace-theme();
+
+  // custom general styles
+
+  .ng2-smart-filters {
+    select.form-control:not([size]):not([multiple]) {
+      height: 36px !important;
+    }
+  }
+  
+  th.ng2-smart-actions-title-add {
+    a {
+      height: 2.1rem;
+      background-color: nb-theme(color-primary) !important;
+    }
+  }
+
+  .ng2-smart-actions {
+      .ng2-smart-action-add-create:hover,
+      .ng2-smart-action-edit-edit:hover,
+      .ng2-smart-action-edit-save:hover {
+        color: nb-theme(color-primary) !important;
+      }
+  }
+  
+  
+
 };
 
-.ng2-smart-filters {
-  select.form-control:not([size]):not([multiple]) {
-    height: 36px !important;
-  }
-}
+

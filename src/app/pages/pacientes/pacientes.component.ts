@@ -90,7 +90,7 @@ export class PacientesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.estado = this.estados[0];
+    this.estado = this.estados[1]; // activos
     this.loadData();
   }
 
