@@ -30,6 +30,10 @@ export class DataService {
     });
   }
 
+  getPaciente(id) {
+    return this.afs.doc('pacientes/'+id).valueChanges();
+  }
+
   setPacienteFromData(a) {
     const id = a.payload.doc.id;
     const paciente = a.payload.doc.data();

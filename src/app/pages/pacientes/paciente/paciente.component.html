@@ -3,43 +3,35 @@
       <nb-card>
         <nb-card-header>Paciente</nb-card-header>
         <nb-card-body>
-          <div class="input-group">
-            <input type="text" placeholder="Project" class="form-control"/>
-          </div>
-          <div class="row full-name-inputs">
-            <div class="col-sm-6 input-group">
-              <input type="text" placeholder="Nick" class="form-control"/>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputFirstName">Nombre(s)</label>
+                <input type="text" class="form-control" id="inputFirstName" [(ngModel)]="paciente.nombre">
+              </div>
             </div>
-            <div class="col-sm-6 input-group">
-              <input type="text" placeholder="Last Name" class="form-control"/>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLastName">Apellido(s)</label>
+                <input type="text" class="form-control" id="inputLastName" [(ngModel)]="paciente.apellido">
+              </div>
             </div>
           </div>
-          <div class="input-group">
-            <input type="password" placeholder="Password" class="form-control"/>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail">DNI</label>
+                <input type="text" class="form-control" id="inputDNI" [(ngModel)]="paciente.dni">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite">Website</label>
+                <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+              </div>
+            </div>
           </div>
-          <div class="input-group has-person-icon">
-            <input type="text" placeholder="With Icon" class="form-control"/>
-          </div>
-          <div class="input-group input-group-rounded">
-            <input type="text" placeholder="Rounded border" class="form-control"/>
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Project" class="form-control"/>
-            <small class="form-text">A block of help text that breaks into a new line and may extend beyond one line.
-            </small>
-          </div>
-          <div class="input-group">
-            <input type="text" placeholder="Disabled input" class="form-control" disabled/>
-          </div>
-          <div class="input-group">
-            <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
-          </div>
-          <div class="input-group input-group-sm">
-            <input type="text" placeholder="Small Input" class="form-control"/>
-          </div>
-          <div class="input-group input-group-lg">
-            <input type="text" placeholder="Large Input" class="form-control"/>
-          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </nb-card-body>
       </nb-card>
     </div>
