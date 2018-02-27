@@ -40,9 +40,28 @@
         color: nb-theme(color-primary) !important;
       }
   }
-  
-  
 
+  .form-group.icon {
+    position: relative;
+
+    .form-control {
+      padding-left: 3rem;
+    }
+
+    i {
+        font-size: 1.1rem;
+        position: absolute;
+        z-index: 100;
+        left: 1rem;
+        top: 1.1rem;
+    }
+
+    input[type=date] {
+      height: 52px;
+    }
+
+  }
+  
 };
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../data/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-paciente',
@@ -22,9 +23,15 @@ export class PacienteComponent implements OnInit {
     this.nuevo = this.id === 'new';
     this.data.getPaciente(this.id).subscribe(
       (pac: any) => {
-        this.paciente = pac;
+        this.loadPaciente(pac);
         // console.log('Paciente', this.paciente);
+
     });
+  }
+
+  loadPaciente(p) {
+    this.paciente = p;
+    p.fchNac = moment(p.fchNac, 'DD/MM/YYYY').format('YYYY-MM-DD');
   }
 
 }

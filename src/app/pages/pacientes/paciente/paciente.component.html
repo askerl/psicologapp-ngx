@@ -3,35 +3,55 @@
       <nb-card>
         <nb-card-header>Paciente</nb-card-header>
         <nb-card-body>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="inputFirstName">Nombre(s)</label>
-                <input type="text" class="form-control" id="inputFirstName" [(ngModel)]="paciente.nombre">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <!-- <label for="inputFirstName">Nombre(s)</label> -->
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="paciente.nombre" placeholder="Nombre(s)">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <!-- <label for="inputLastName">Apellido(s)</label> -->
+                  <input type="text" class="form-control" id="apellido" [(ngModel)]="paciente.apellido" placeholder="Apellido(s)">
+                </div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="inputLastName">Apellido(s)</label>
-                <input type="text" class="form-control" id="inputLastName" [(ngModel)]="paciente.apellido">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group icon">
+                  <!-- <label for="inputEmail">DNI</label> -->
+                  <i class="fa fa-id-card-o"></i>
+                  <input type="text" class="form-control" id="dni" [(ngModel)]="paciente.dni" placeholder="DNI">
+                  <small class="form-text">Ej: 32023056</small>
+                </div>                
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group icon">
+                  <i class="fa fa-calendar"></i>
+                  <input type="date" class="form-control" id="fchNac" [(ngModel)]="paciente.fchNac">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="inputEmail">DNI</label>
-                <input type="text" class="form-control" id="inputDNI" [(ngModel)]="paciente.dni">
+            <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group icon">
+                    <i class="fa fa-phone"></i>
+                    <input type="text" class="form-control" id="tel" [(ngModel)]="paciente.tel" placeholder="Teléfono">
+                    <small class="form-text">Ej: 1134567890</small>
+                  </div>                
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group icon">
+                      <i class="fa fa-phone-square"></i>
+                      <input type="text" class="form-control" id="telFlia" [(ngModel)]="paciente.telFlia" placeholder="Contacto familiar">
+                      <small class="form-text">Ej: 1134567890 (padre/madre)</small>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="inputWebsite">Website</label>
-                <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
         </nb-card-body>
       </nb-card>
     </div>
