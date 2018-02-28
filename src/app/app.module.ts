@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxToggleModule } from 'ngx-toggle';
 
 // connection to Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -38,6 +39,7 @@ import { NombrePacienteViewComponent } from './customRender/nombre-paciente-view
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NgxToggleModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),

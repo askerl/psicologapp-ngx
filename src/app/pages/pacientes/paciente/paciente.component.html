@@ -1,59 +1,143 @@
-<div class="row">
-    <div class="col-xs-12">
-      <nb-card>
-        <nb-card-header>Paciente</nb-card-header>
-        <nb-card-body>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <!-- <label for="inputFirstName">Nombre(s)</label> -->
-                  <input type="text" class="form-control" id="nombre" [(ngModel)]="paciente.nombre" placeholder="Nombre(s)">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <!-- <label for="inputLastName">Apellido(s)</label> -->
-                  <input type="text" class="form-control" id="apellido" [(ngModel)]="paciente.apellido" placeholder="Apellido(s)">
-                </div>
-              </div>
+<nb-card>
+  <nb-card-header>Paciente</nb-card-header>
+  <nb-card-body>
+    <form #pacienteForm="ngForm">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="nombre">Nombre(s)</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" required [(ngModel)]="paciente.nombre" placeholder="Nombre(s)">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="apellido">Apellido(s)</label>
+            <input type="text" class="form-control" name="apellido" id="apellido" required [(ngModel)]="paciente.apellido" placeholder="Apellido(s)">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="dni">DNI</label>
+            <div class="input-group icon">
+              <i class="fa fa-id-card-o"></i>
+              <input type="text" class="form-control" name="dni" id="dni" [(ngModel)]="paciente.dni" placeholder="DNI">
             </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group icon">
-                  <!-- <label for="inputEmail">DNI</label> -->
-                  <i class="fa fa-id-card-o"></i>
-                  <input type="text" class="form-control" id="dni" [(ngModel)]="paciente.dni" placeholder="DNI">
-                  <small class="form-text">Ej: 32023056</small>
-                </div>                
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group icon">
-                  <i class="fa fa-calendar"></i>
-                  <input type="date" class="form-control" id="fchNac" [(ngModel)]="paciente.fchNac">
-                </div>
-              </div>
+            <small class="form-text">Ej: 32023056</small>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="fchNac">Fecha de Nacimiento</label>
+            <div class="input-group icon">
+              <i class="fa fa-calendar"></i>
+              <input type="date" class="form-control" name="fchNac" id="fchNac" [(ngModel)]="paciente.fchNac">
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group icon">
-                    <i class="fa fa-phone"></i>
-                    <input type="text" class="form-control" id="tel" [(ngModel)]="paciente.tel" placeholder="Teléfono">
-                    <small class="form-text">Ej: 1134567890</small>
-                  </div>                
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group icon">
-                      <i class="fa fa-phone-square"></i>
-                      <input type="text" class="form-control" id="telFlia" [(ngModel)]="paciente.telFlia" placeholder="Contacto familiar">
-                      <small class="form-text">Ej: 1134567890 (padre/madre)</small>
-                  </div>
-                </div>
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tel">Teléfono</label>
+            <div class="input-group icon">
+              <i class="fa fa-phone"></i>
+              <input type="text" class="form-control" name="tel" id="tel" [(ngModel)]="paciente.tel" placeholder="Teléfono">
+            </div>
+            <small class="form-text">Ej: 1134567890</small>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="telFlia">Contacto Familiar</label>
+            <div class="input-group icon">
+              <i class="fa fa-phone-square"></i>
+              <input type="text" class="form-control" name="telFlia" id="telFlia" [(ngModel)]="paciente.telFlia" placeholder="Contacto familiar">
+            </div>
+            <small class="form-text">Ej: 1134567890 (padre/madre)</small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="dir">Dirección</label>
+            <div class="input-group icon">
+              <i class="fa fa-address-book-o"></i>
+              <input type="text" class="form-control" name="dir" id="dir" [(ngModel)]="paciente.dir" placeholder="Dirección">
+            </div>
+            <small class="form-text">Ej: Rivadavia 3456 Piso 3 Depto 17</small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tipo">Tipo de Paciente</label>
+            <select id="tipo" name="tipo" class="form-control" required [(ngModel)]="paciente.tipo" #tipo="ngModel">
+              <option value="">Seleccione...</option>
+              <option *ngFor="let t of tipoPaciente" [value]="t.value">{{t.title}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-        </nb-card-body>
-      </nb-card>
-    </div>
-</div>
-  
+      <div *ngIf="paciente.tipo === CONSTANTS.pacientePrepaga">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="prepaga">Prepaga</label>
+              <select id="prepaga" name="prepaga" class="form-control" required [(ngModel)]="paciente.prepaga" #prepaga="ngModel">
+                <option value="">Seleccione Prepaga...</option>
+                <option *ngFor="let p of prepagas" [value]="p.value">{{p.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="facturaPrepaga">Factura para Prepaga?</label>
+              <ngx-toggle
+                  onColor="{{toggle.onColor}}"
+                  onText="{{toggle.onText}}"
+                  offColor="{{toggle.offColor}}"
+                  offText="{{toggle.offText}}"
+                  [disabled]="toggle.disabled"
+                  [size]="toggle.size"
+                  [(value)]="paciente.facturaPrepaga"
+              >
+              </ngx-toggle>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="paciente.tipo === CONSTANTS.pacientePrivado">
+
+      </div>
+
+      <nb-actions class="form-actions" size="medium" fullWidth>
+        <nb-action>
+          <button type="submit" class="btn btn-hero-primary btn-sm">{{CONSTANTS.btn.GUARDAR}}</button>
+        </nb-action>
+        <nb-action>
+          <button class="btn btn-hero-danger btn-sm">{{CONSTANTS.btn.ELIMINAR}}</button>
+        </nb-action>
+        <nb-action>
+          <button class="btn btn-hero-secondary btn-sm" (click)="goBack()">{{CONSTANTS.btn.CANCELAR}}</button>
+        </nb-action>
+      </nb-actions>
+
+      <div class="row block-level-buttons">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-hero-primary btn-sm btn-block">{{CONSTANTS.btn.GUARDAR}}</button>
+          <button class="btn btn-hero-danger btn-sm btn-block">{{CONSTANTS.btn.ELIMINAR}}</button>
+          <button class="btn btn-hero-secondary btn-sm btn-block" (click)="goBack()">{{CONSTANTS.btn.CANCELAR}}</button>
+        </div>
+      </div>
+    
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -5,6 +5,9 @@ export const CONSTANTS = {
         'P': { nombre: 'Privado', color: 'warning' },
     },
 
+    pacientePrepaga: 'O',
+    pacientePrivado: 'P',
+
     prepagasById: {
         'galeno': {
             nombre: 'Galeno',
@@ -24,7 +27,13 @@ export const CONSTANTS = {
         { value: null, title: 'Todos' },
         { value: true, title: 'Activos' },
         { value: false, title: 'Inactivos'}
-    ]
+    ],
+
+    btn: {
+        GUARDAR: 'GUARDAR',
+        ELIMINAR: 'ELIMINAR',
+        CANCELAR: 'CANCELAR'
+    }
 
 };
 

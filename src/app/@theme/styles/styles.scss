@@ -41,11 +41,12 @@
       }
   }
 
-  .form-group.icon {
+  .input-group.icon {
     position: relative;
 
     .form-control {
       padding-left: 3rem;
+      border-radius: 0.375rem;
     }
 
     i {
@@ -60,6 +61,38 @@
       height: 52px;
     }
 
+  }
+
+  .btn:hover {
+    cursor: pointer !important;
+  }
+
+  nb-actions.form-actions {
+    margin-top: 30px;
+  }
+
+  form {
+    label {
+      color: nb-theme(color-primary-2);
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .form-actions {
+      display: none;
+    }
+  }
+
+  @media (min-width: 601px) {
+    .block-level-buttons {
+      display: none;
+    }
+  }
+
+  .block-level-buttons {
+    margin-top: 15px;
   }
   
 };
