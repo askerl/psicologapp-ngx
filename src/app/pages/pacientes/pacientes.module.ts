@@ -4,6 +4,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { PacientesComponent } from './pacientes.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { NgxToggleModule } from 'ngx-toggle';
+import { SesionesCardComponent } from './sesiones-card/sesiones-card.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { NgxToggleModule } from 'ngx-toggle';
   declarations: [
     PacientesComponent,
     PacienteComponent,
+    SesionesCardComponent
   ],
 })
 export class PacientesModule { }

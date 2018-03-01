@@ -176,7 +176,8 @@
 
         <div class="row" *ngIf="!nuevo">
           <div class="col-sm-12">
-            SESIONES REALIZADAS
+            <ngx-sesiones-card tipo="realizadas" cantidad="{{paciente.sesiones}}">
+            </ngx-sesiones-card>
           </div>
         </div>
 
