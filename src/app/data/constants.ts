@@ -32,7 +32,9 @@ export const CONSTANTS = {
     btn: {
         GUARDAR: 'GUARDAR',
         ELIMINAR: 'ELIMINAR',
-        CANCELAR: 'CANCELAR'
+        CANCELAR: 'CANCELAR',
+        ACTIVAR: 'ACTIVAR',
+        DESACTIVAR: 'DESACTIVAR'
     }
 
 };

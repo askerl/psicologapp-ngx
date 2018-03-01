@@ -77,4 +77,8 @@ export class DataService {
     return CONSTANTS.prepagasById[idPrepaga].nombre;
   }
 
+  getPagosPrepaga(idPrepaga: string) {
+    return CONSTANTS.prepagasById[idPrepaga].pagos;
+  }
+
 }

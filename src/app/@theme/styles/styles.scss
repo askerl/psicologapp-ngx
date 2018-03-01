@@ -94,6 +94,14 @@
   .block-level-buttons {
     margin-top: 15px;
   }
+
+  ngx-toggle {
+    display: flex;
+  }
+
+  .text-link {
+    color: nb-theme(link-color);
+  }
   
 };
 

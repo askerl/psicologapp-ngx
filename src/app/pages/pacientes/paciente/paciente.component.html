@@ -1,5 +1,9 @@
 <nb-card>
-  <nb-card-header>Paciente</nb-card-header>
+  <nb-card-header class="d-flex justify-content-between">
+    <span>Paciente</span>
+    <span *ngIf="!paciente.activo && !nuevo" class="text-danger">INACTIVO</span>
+    <span *ngIf="nuevo" class="text-link font-weight-bold">NUEVO</span>
+  </nb-card-header>
   <nb-card-body>
     <form #pacienteForm="ngForm">
       <div class="row">
@@ -75,10 +79,19 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="tipo">Tipo de Paciente</label>
-            <select id="tipo" name="tipo" class="form-control" required [(ngModel)]="paciente.tipo" #tipo="ngModel">
+            <select id="tipo" name="tipo" class="form-control" required [(ngModel)]="paciente.tipo" (change)="onChangeTipo($event.target.value)" #tipo="ngModel">
               <option value="">Seleccione...</option>
               <option *ngFor="let t of tipoPaciente" [value]="t.value">{{t.title}}</option>
             </select>
+          </div>
+        </div>
+        <div class="col-sm-6" *ngIf="paciente.tipo === CONSTANTS.pacientePrivado">
+          <div class="form-group">
+            <label for="valorConsulta">Valor de consulta</label>
+            <div class="input-group icon">
+              <i class="fa fa-usd"></i>
+              <input type="number" class="form-control" name="valorConsulta" id="valorConsulta" [(ngModel)]="paciente.valorConsulta" #valorConsulta="ngModel">
+            </div>
           </div>
         </div>
       </div>
@@ -89,7 +102,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="prepaga">Prepaga</label>
-              <select id="prepaga" name="prepaga" class="form-control" required [(ngModel)]="paciente.prepaga" #prepaga="ngModel">
+              <select id="prepaga" name="prepaga" class="form-control" required [(ngModel)]="paciente.prepaga" (change)="onChangePrepaga($event.target.value)" #prepaga="ngModel">
                 <option value="">Seleccione Prepaga...</option>
                 <option *ngFor="let p of prepagas" [value]="p.value">{{p.title}}</option>
               </select>
@@ -98,17 +111,62 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="facturaPrepaga">Factura para Prepaga?</label>
-              <ngx-toggle
-                  onColor="{{toggle.onColor}}"
-                  onText="{{toggle.onText}}"
-                  offColor="{{toggle.offColor}}"
-                  offText="{{toggle.offText}}"
-                  [disabled]="toggle.disabled"
-                  [size]="toggle.size"
-                  [(value)]="paciente.facturaPrepaga"
-              >
+              <ngx-toggle onColor="{{toggle.onColor}}" onText="{{toggle.onText}}" offColor="{{toggle.offColor}}" offText="{{toggle.offText}}"
+                [disabled]="toggle.disabled" [size]="toggle.size" [(value)]="paciente.facturaPrepaga">
               </ngx-toggle>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="pago">Pago por Paciente</label>
+              <select id="pago" name="pago" class="form-control" required [(ngModel)]="paciente.pago" #pago="ngModel">
+                <option value="-1">Seleccione pago...</option>
+                <option *ngFor="let p of pagos; let i = index" [value]="i">$ {{p}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="copago">Copago</label>
+              <div class="input-group icon">
+                <i class="fa fa-usd"></i>
+                <input type="number" class="form-control" name="copago" id="copago" [(ngModel)]="paciente.copago" #copago="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="sesionesAutorizadas">Sesiones autorizadas</label>
+              <div class="input-group icon">
+                <i class="fa fa-comments-o"></i>
+                <input type="number" class="form-control" name="sesionesAutorizadas" id="sesionesAutorizadas" [(ngModel)]="paciente.sesionesAut"
+                  #sesionesAutorizadas="ngModel">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="credencial">Credencial</label>
+              <div class="input-group icon">
+                <i class="fa fa-vcard"></i>
+                <input type="text" class="form-control" name="credencial" id="credencial" [(ngModel)]="paciente.credencial" #credencial="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!nuevo">
+          <div class="col-sm-6">
+            SESIONES USADAS
+          </div>
+          <div class="col-sm-6">
+            SESIONES RESTANTES
           </div>
         </div>
 
@@ -116,11 +174,33 @@
 
       <div *ngIf="paciente.tipo === CONSTANTS.pacientePrivado">
 
+        <div class="row" *ngIf="!nuevo">
+          <div class="col-sm-12">
+            SESIONES REALIZADAS
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="notas">Notas</label>
+            <div class="input-group icon">
+              <i class="fa fa-book"></i>
+              <input type="textarea" class="form-control" name="notas" id="notas" [(ngModel)]="paciente.notas" #notas="ngModel">
+            </div>
+          </div>
+        </div>
       </div>
 
       <nb-actions class="form-actions" size="medium" fullWidth>
         <nb-action>
           <button type="submit" class="btn btn-hero-primary btn-sm">{{CONSTANTS.btn.GUARDAR}}</button>
+        </nb-action>
+        <nb-action>
+          <button *ngIf="!paciente.activo" class="btn btn-hero-success btn-sm">{{CONSTANTS.btn.ACTIVAR}}</button>
+          <button *ngIf="paciente.activo" class="btn btn-hero-warning btn-sm">{{CONSTANTS.btn.DESACTIVAR}}</button>
         </nb-action>
         <nb-action>
           <button class="btn btn-hero-danger btn-sm">{{CONSTANTS.btn.ELIMINAR}}</button>
@@ -133,6 +213,8 @@
       <div class="row block-level-buttons">
         <div class="col-md-12">
           <button type="submit" class="btn btn-hero-primary btn-sm btn-block">{{CONSTANTS.btn.GUARDAR}}</button>
+          <button *ngIf="!paciente.activo" class="btn btn-hero-success btn-sm btn-block">{{CONSTANTS.btn.ACTIVAR}}</button>
+          <button *ngIf="paciente.activo" class="btn btn-hero-warning btn-sm btn-block">{{CONSTANTS.btn.DESACTIVAR}}</button>
           <button class="btn btn-hero-danger btn-sm btn-block">{{CONSTANTS.btn.ELIMINAR}}</button>
           <button class="btn btn-hero-secondary btn-sm btn-block" (click)="goBack()">{{CONSTANTS.btn.CANCELAR}}</button>
         </div>

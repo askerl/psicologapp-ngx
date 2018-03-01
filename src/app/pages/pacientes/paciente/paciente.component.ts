@@ -17,17 +17,18 @@ export class PacienteComponent implements OnInit {
   id;
   nuevo: boolean = true;
   paciente: any = {};
+  pacienteDB: any = {};
   tipoPaciente: any[];
   prepagas: any[];
+  pagos: any[];
 
   toggle: any = {
     onColor: 'primary',
     offColor: 'secondary',
-    onText: 'On',
-    offText: 'Off',
+    onText: 'Sí',
+    offText: 'No',
     disabled: false,
-    size: '',
-    value: null
+    size: ''
   };
 
   constructor(private route: ActivatedRoute, private location: Location, private data: DataService) {
@@ -42,8 +43,9 @@ export class PacienteComponent implements OnInit {
     if (!this.nuevo) {
       this.data.getPaciente(this.id).subscribe(
         (pac: any) => {
+          this.pacienteDB = pac;
+          // console.log('Paciente DB', this.pacienteDB);
           this.loadPaciente(pac);
-          // console.log('Paciente', this.paciente);
       });
     } else {
       // inicializo datos de paciente nuevo
@@ -51,18 +53,40 @@ export class PacienteComponent implements OnInit {
         activo: true,
         tipo: '',
         prepaga: '',
-        facturaPrepaga: true
+        pago: -1
       }
     }
   }
 
-  loadPaciente(p) {
-    this.paciente = p;
-    p.fchNac = moment(p.fchNac, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  loadPaciente(pac) {
+    this.paciente = JSON.parse(JSON.stringify(pac));
+    const p = this.paciente;
+    const fchNac = moment(p.fchNac, 'DD/MM/YYYY');
+    p.fchNac = fchNac.isValid() ? fchNac.format('YYYY-MM-DD') : null;
+
+    if (p.tipo === CONSTANTS.pacientePrepaga) {
+      this.pagos = this.data.getPagosPrepaga(p.prepaga);
+    }
+
+    if (p.tipo === CONSTANTS.pacientePrivado) {
+    }
+
+    // console.log('paciente cargado', p);
   }
 
   goBack() {
     this.location.back();
+  }
+
+  onChangeTipo(newValue) {
+    if (newValue === CONSTANTS.pacientePrepaga) {
+      this.paciente.facturaPrepaga = true;
+    }
+  }
+
+  onChangePrepaga(newValue) {
+    // cargo pagos de la prepaga
+    this.pagos = newValue ? this.data.getPagosPrepaga(newValue) : [];
   }
 
 }
