@@ -33,6 +33,22 @@
         @include btn-hero-info-gradient();
         @include btn-hero-info-bevel-glow-shadow();
       }
+      &.primary {
+        @include btn-hero-primary-gradient();
+        @include btn-hero-primary-bevel-glow-shadow();
+      }
+      &.success {
+        @include btn-hero-success-gradient();
+        @include btn-hero-success-bevel-glow-shadow();
+      }
+      &.warning {
+        @include btn-hero-warning-gradient();
+        @include btn-hero-warning-bevel-glow-shadow();
+      }
+      &.danger {
+        @include btn-hero-danger-gradient();
+        @include btn-hero-danger-bevel-glow-shadow();
+      }
 
     }
 
@@ -41,15 +57,22 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
-      padding: 0 0.5rem 0 0.75rem;
+      width: 100%;
+      padding-right: 1rem;
       border-left: 1px solid transparent;
     }
 
     .title {
+      display: flex;
+      justify-content: space-between;
       font-family: nb-theme(font-secondary);
       font-size: 1.25rem;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
+      .reset {
+        font-size: 1rem;
+        cursor: pointer;
+      }
     }
 
     .status {
@@ -58,6 +81,11 @@
       text-transform: uppercase;
       color: nb-theme(card-fg);
     }
+
+    .porcentaje {
+      margin-top: 0.4rem;
+    }
+
   }
 
 }

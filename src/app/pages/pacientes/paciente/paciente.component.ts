@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { DataService } from '../../../data/data.service';
 import { CONSTANTS } from '../../../data/constants';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ngx-paciente',
@@ -13,6 +14,7 @@ import * as moment from 'moment';
 export class PacienteComponent implements OnInit {
 
   readonly CONSTANTS = CONSTANTS;
+  readonly errores = CONSTANTS.errores;
 
   id;
   nuevo: boolean = true;
@@ -21,6 +23,8 @@ export class PacienteComponent implements OnInit {
   tipoPaciente: any[];
   prepagas: any[];
   pagos: any[];
+  porcentajes: any = {};
+  pacientes: any[] = [];
 
   toggle: any = {
     onColor: 'primary',
@@ -53,9 +57,14 @@ export class PacienteComponent implements OnInit {
         activo: true,
         tipo: '',
         prepaga: '',
-        pago: -1
+        pago: ''
       }
     }
+    this.data.getPacientes(null);
+    this.data.pacientes.subscribe(
+      (pac: any[]) => {
+        this.pacientes = pac;
+    });
   }
 
   loadPaciente(pac) {
@@ -66,6 +75,7 @@ export class PacienteComponent implements OnInit {
 
     if (p.tipo === CONSTANTS.pacientePrepaga) {
       this.pagos = this.data.getPagosPrepaga(p.prepaga);
+      this.porcentajes = this.data.calcPorcentajesSesiones(p.sesionesAut, p.sesiones);
     }
 
     if (p.tipo === CONSTANTS.pacientePrivado) {
@@ -87,6 +97,29 @@ export class PacienteComponent implements OnInit {
   onChangePrepaga(newValue) {
     // cargo pagos de la prepaga
     this.pagos = newValue ? this.data.getPagosPrepaga(newValue) : [];
+  }
+
+  resetSesiones(e) {
+    // console.log('Reset sesiones', e);
+  }
+
+  guardar() {
+    // console.log('Guardando paciente...', this.paciente);
+  }
+
+  checkExistePaciente() {
+    if (this.paciente.nombre && this.paciente.apellido) {
+      if (_.findIndex(this.pacientes, p => {
+        const item = _.trim(p.nombre) + _.trim(p.apellido);
+        const pac = _.trim(this.paciente.nombre) + _.trim(this.paciente.apellido);
+        return item.toUpperCase() === pac.toUpperCase() && p.id !== this.paciente.id;
+      }) !== -1) {
+        // console.log('YA EXISTE PACIENTE');
+
+        // LEVANTAR TOASTER
+
+      };
+    }
   }
 
 }

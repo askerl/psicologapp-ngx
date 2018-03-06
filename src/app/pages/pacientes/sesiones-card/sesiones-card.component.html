@@ -1,14 +1,20 @@
 <nb-card>
 
     <div class="icon-container">
-        <div class="icon info">
+        <div class="icon {{color}}">
             <i class="fa fa-comments-o"></i>
         </div>
     </div>
     
     <div class="details">
-        <div class="title">{{ cantidad }}</div>
-        <div class="status">Sesiones realizadas</div>
+        <div class="title">
+            <div>{{ cantidad }}</div>
+            <div *ngIf="reset" class="reset" (click)="resetAction()"><i class="nb-loop"></i> Reiniciar</div>
+        </div>
+        <div class="status">{{ 'Sesiones ' + tipo }}</div>
+        <div class="porcentaje">
+            <ngb-progressbar [type]="color" [value]="porc" height="10px" [striped]="value <= 0" [animated]="true"></ngb-progressbar>
+        </div>
     </div>
 
 </nb-card>

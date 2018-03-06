@@ -5,18 +5,26 @@
     <span *ngIf="nuevo" class="text-link font-weight-bold">NUEVO</span>
   </nb-card-header>
   <nb-card-body>
-    <form #pacienteForm="ngForm">
+    <form #pacienteForm="ngForm" (ngSubmit)="guardar()">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
             <label for="nombre">Nombre(s)</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" required [(ngModel)]="paciente.nombre" placeholder="Nombre(s)">
+            <input type="text" class="form-control" name="nombre" id="nombre" required [(ngModel)]="paciente.nombre" (blur)="checkExistePaciente()"
+              placeholder="Nombre(s)" #nombre="ngModel">
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <small class="input-error" *ngIf="nombre.errors.required">{{errores.nombreVacio}}</small>
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="apellido">Apellido(s)</label>
-            <input type="text" class="form-control" name="apellido" id="apellido" required [(ngModel)]="paciente.apellido" placeholder="Apellido(s)">
+            <input type="text" class="form-control" name="apellido" id="apellido" required [(ngModel)]="paciente.apellido" (blur)="checkExistePaciente()"
+              placeholder="Apellido(s)" #apellido="ngModel">
+            <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+              <small class="input-error" *ngIf="apellido.errors.required">{{errores.apellidoVacio}}</small>
+            </div>
           </div>
         </div>
       </div>
@@ -83,6 +91,9 @@
               <option value="">Seleccione...</option>
               <option *ngFor="let t of tipoPaciente" [value]="t.value">{{t.title}}</option>
             </select>
+            <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)">
+              <small class="input-error" *ngIf="tipo.errors.required">{{errores.tipoPacienteVacio}}</small>
+            </div>
           </div>
         </div>
         <div class="col-sm-6" *ngIf="paciente.tipo === CONSTANTS.pacientePrivado">
@@ -90,7 +101,10 @@
             <label for="valorConsulta">Valor de consulta</label>
             <div class="input-group icon">
               <i class="fa fa-usd"></i>
-              <input type="number" class="form-control" name="valorConsulta" id="valorConsulta" [(ngModel)]="paciente.valorConsulta" #valorConsulta="ngModel">
+              <input type="number" class="form-control" required name="valorConsulta" id="valorConsulta" [(ngModel)]="paciente.valorConsulta" #valorConsulta="ngModel">              
+            </div>
+            <div *ngIf="valorConsulta.invalid && (valorConsulta.dirty || valorConsulta.touched)">
+              <small class="input-error" *ngIf="valorConsulta.errors.required">{{errores.valorConsultaVacio}}</small>
             </div>
           </div>
         </div>
@@ -106,6 +120,9 @@
                 <option value="">Seleccione Prepaga...</option>
                 <option *ngFor="let p of prepagas" [value]="p.value">{{p.title}}</option>
               </select>
+              <div *ngIf="prepaga.invalid && (prepaga.dirty || prepaga.touched)">
+                <small class="input-error" *ngIf="prepaga.errors.required">{{errores.prepagaVacia}}</small>
+              </div>
             </div>
           </div>
           <div class="col-sm-6">
@@ -123,9 +140,12 @@
             <div class="form-group">
               <label for="pago">Pago por Paciente</label>
               <select id="pago" name="pago" class="form-control" required [(ngModel)]="paciente.pago" #pago="ngModel">
-                <option value="-1">Seleccione pago...</option>
+                <option value="">Seleccione pago...</option>
                 <option *ngFor="let p of pagos; let i = index" [value]="i">$ {{p}}</option>
               </select>
+              <div *ngIf="pago.invalid && (pago.dirty || pago.touched)">
+                <small class="input-error" *ngIf="pago.errors.required">{{errores.pagoPrepagaVacio}}</small>
+              </div>
             </div>
           </div>
           <div class="col-sm-6">
@@ -163,10 +183,13 @@
 
         <div class="row" *ngIf="!nuevo">
           <div class="col-sm-6">
-            SESIONES USADAS
+            <ngx-sesiones-card tipo="usadas" cantidad="{{paciente.sesiones}}" porcentaje="{{porcentajes.porcUsadas}}"
+              (onReset)="resetSesiones($event)">
+            </ngx-sesiones-card>
           </div>
           <div class="col-sm-6">
-            SESIONES RESTANTES
+            <ngx-sesiones-card tipo="restantes" cantidad="{{paciente.sesionesAut - paciente.sesiones}}" porcentaje="{{porcentajes.porcRestantes}}">
+            </ngx-sesiones-card>
           </div>
         </div>
 
@@ -189,7 +212,7 @@
             <label for="notas">Notas</label>
             <div class="input-group icon">
               <i class="fa fa-book"></i>
-              <input type="textarea" class="form-control" name="notas" id="notas" [(ngModel)]="paciente.notas" #notas="ngModel">
+              <textarea class="form-control" rows='2' name="notas" id="notas" [(ngModel)]="paciente.notas" #notas="ngModel"></textarea>
             </div>
           </div>
         </div>
@@ -197,7 +220,7 @@
 
       <nb-actions class="form-actions" size="medium" fullWidth>
         <nb-action>
-          <button type="submit" class="btn btn-hero-primary btn-sm">{{CONSTANTS.btn.GUARDAR}}</button>
+          <button type="submit" class="btn btn-hero-primary btn-sm" [disabled]="pacienteForm.invalid">{{CONSTANTS.btn.GUARDAR}}</button>
         </nb-action>
         <nb-action>
           <button *ngIf="!paciente.activo" class="btn btn-hero-success btn-sm">{{CONSTANTS.btn.ACTIVAR}}</button>
@@ -213,7 +236,7 @@
 
       <div class="row block-level-buttons">
         <div class="col-md-12">
-          <button type="submit" class="btn btn-hero-primary btn-sm btn-block">{{CONSTANTS.btn.GUARDAR}}</button>
+          <button type="submit" class="btn btn-hero-primary btn-sm btn-block" [disabled]="pacienteForm.invalid">{{CONSTANTS.btn.GUARDAR}}</button>
           <button *ngIf="!paciente.activo" class="btn btn-hero-success btn-sm btn-block">{{CONSTANTS.btn.ACTIVAR}}</button>
           <button *ngIf="paciente.activo" class="btn btn-hero-warning btn-sm btn-block">{{CONSTANTS.btn.DESACTIVAR}}</button>
           <button class="btn btn-hero-danger btn-sm btn-block">{{CONSTANTS.btn.ELIMINAR}}</button>

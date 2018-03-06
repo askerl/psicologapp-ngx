@@ -35,6 +35,16 @@ export const CONSTANTS = {
         CANCELAR: 'CANCELAR',
         ACTIVAR: 'ACTIVAR',
         DESACTIVAR: 'DESACTIVAR'
+    },
+
+    errores: {
+        nombreVacio: 'Ingrese el nombre',
+        apellidoVacio: 'Ingrese el apellido',
+        tipoPacienteVacio: 'Seleccione el tipo',
+        valorConsultaVacio: 'Ingrese el valor de la consulta',
+        prepagaVacia: 'Seleccione la prepaga',
+        pagoPrepagaVacio: 'Seleccione el pago',
+        existePacienteNombre: 'Ya ingresó un Paciente con ese nombre y apellido'
     }
 
 };
